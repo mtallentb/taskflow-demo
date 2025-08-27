@@ -365,3 +365,39 @@ export interface PaginatedResponse<T> {
   hasNextPage: boolean;
   hasPrevPage: boolean;
 }
+
+// UI Component Types for Frontend
+export interface TaskColumn {
+  id: TaskStatus;
+  title: string;
+  tasks: Task[];
+}
+
+export interface DragDropResult {
+  draggableId: string;
+  type: string;
+  source: {
+    droppableId: string;
+    index: number;
+  };
+  destination?: {
+    droppableId: string;
+    index: number;
+  } | null;
+  reason: 'DROP' | 'CANCEL';
+}
+
+export interface TaskCardProps {
+  task: Task;
+  index: number;
+  onEdit?: (task: Task) => void;
+  onDelete?: (taskId: string) => void;
+  isDragging?: boolean;
+}
+
+export interface TaskBoardProps {
+  tasks: Task[];
+  onTaskUpdate?: (taskId: string, updates: Partial<Task>) => void;
+  onTaskDelete?: (taskId: string) => void;
+  onTaskCreate?: (task: Omit<Task, 'id' | 'createdAt' | 'updatedAt'>) => void;
+}
